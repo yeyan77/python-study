@@ -181,14 +181,35 @@ with open("test.txt","rt") as in_file:
     print(text)
 """
 
-print ("Content-type:text/html")
-print ()                             # 空行，告诉服务器结束头部
-print ('<html>')
-print ('<head>')
-print ('<meta charset="utf-8">')
-print ('<title>Hello Word - 我的第一个 CGI 程序！</title>')
-print ('</head>')
-print ('<body>')
-print ('<h2>Hello Word! 我是来自菜鸟教程的第一CGI程序</h2>')
-print ('</body>')
-print ('</html>')
+# print ("Content-type:text/html")
+# print ()                             # 空行，告诉服务器结束头部
+# print ('<html>')
+# print ('<head>')
+# print ('<meta charset="utf-8">')
+# print ('<title>Hello Word - 我的第一个 CGI 程序！</title>')
+# print ('</head>')
+# print ('<body>')
+# print ('<h2>Hello Word! 我是来自菜鸟教程的第一CGI程序</h2>')
+# print ('</body>')
+# print ('</html>')
+
+#!/usr/bin/python3
+
+import pymysql
+
+# 打开数据库连接
+db = pymysql.connect("192.168.0.152","root","123456","monitor_yjg2" )
+
+# 使用 cursor() 方法创建一个游标对象 cursor
+cursor = db.cursor()
+
+# 使用 execute()  方法执行 SQL 查询
+cursor.execute("SELECT VERSION()")
+
+# 使用 fetchone() 方法获取单条数据.
+data = cursor.fetchone()
+
+print ("Database version : %s " % data)
+
+# 关闭数据库连接
+db.close()
